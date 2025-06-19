@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: The Frontiers of Modern Mathematics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 400px;
+            }
+        }
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .flowchart-arrow {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 6rem;
+        }
+        .flowchart-arrow::after {
+            content: '▼';
+            font-size: 2rem;
+            color: #ef5675;
+            position: absolute;
+        }
+        .relationship-arrow {
+            position: absolute;
+            background-color: #7a5195;
+            height: 2px;
+            transform-origin: left center;
+        }
+        .relationship-arrow::after {
+            content: '▶';
+            position: absolute;
+            right: -8px;
+            top: -9px;
+            color: #7a5195;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <nav class="bg-primary p-4 shadow-md sticky top-0 z-50">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+            <a href="#" class="text-white text-2xl font-bold mb-2 md:mb-0">Math Frontiers</a>
+            <div class="flex flex-wrap justify-center gap-4 text-sm md:text-base">
+                <a href="#overview-stats" class="text-gray-300 hover:text-white transition-colors">Overview</a>
+                <a href="#landscape-discovery" class="text-gray-300 hover:text-white transition-colors">Discovery</a>
+                <a href="#core-computational" class="text-gray-300 hover:text-white transition-colors">Core & Comp.</a>
+                <a href="#quantum-ai" class="text-gray-300 hover:text-white transition-colors">Quantum & AI</a>
+                <a href="#interdisciplinary-impact" class="text-gray-300 hover:text-white transition-colors">Interdisciplinary</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="text-center my-12 fade-in-section">
+            <h1 class="text-4xl md:text-6xl font-black text-primary tracking-tight">Charting the Uncharted</h1>
+            <p class="text-xl md:text-2xl mt-2 font-light text-gray-600">The Frontiers of Modern Mathematics</p>
+        </header>
+        
+        <section id="overview-stats" class="fade-in-section my-16">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform">
+                    <p class="text-6xl font-black text-accent1">105</p>
+                    <p class="mt-2 text-lg font-semibold text-gray-700">Identified Frontier Research Topics</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform">
+                    <p class="text-6xl font-black text-accent2">5</p>
+                    <p class="mt-2 text-lg font-semibold text-gray-700">Core Research Domains</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform">
+                    <p class="text-6xl font-black text-accent3">30+</p>
+                    <p class="mt-2 text-lg font-semibold text-gray-700">Interdisciplinary Fields Impacted</p>
+                </div>
+                <div class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform">
+                    <p class="text-6xl font-black text-accent4">2</p>
+                    <p class="mt-2 text-lg font-semibold text-gray-700">Transformative Forces: AI & Quantum</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="landscape-discovery" class="my-20 fade-in-section">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-primary mb-2">The Landscape of Discovery</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    Modern mathematics thrives on a dynamic blend of centuries-old unsolved problems and rapidly emerging fields. This landscape is shaped by both deep theoretical inquiry and the increasing demands of science and technology, defining the cutting edge of human knowledge.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">Distribution of Research Frontiers</h3>
+                        <div class="chart-container">
+                            <canvas id="distributionChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 text-center">
+                            A significant portion of frontier topics are in Core Theoretical areas and increasingly in Interdisciplinary fields, highlighting the dual nature of modern math.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">The Millennium Prize Problems</h3>
+                        <p class="text-center text-gray-600 mb-4">Seven of the most profound and difficult open problems, established in 2000 to guide research.</p>
+                        <div class="space-y-3">
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Birch and Swinnerton-Dyer Conjecture</div>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Hodge Conjecture</div>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Navier–Stokes Existence and Smoothness</div>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> P versus NP Problem</div>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Riemann Hypothesis</div>
+                            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Yang–Mills Existence and Mass Gap</div>
+                            <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg"><strong>Solved:</strong> Poincaré Conjecture (by G. Perelman)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="core-computational" class="my-20 fade-in-section">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-primary mb-2">The Core & The Computational</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    Foundational pillars like Number Theory and Topology continue to pose deep questions, while computational mathematics provides powerful new tools for both theoretical and applied problems.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                    <div class="md:col-span-3">
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">A Deeper Look at Theoretical Mathematics</h3>
+                        <div class="chart-container h-[450px] max-h-[60vh]">
+                            <canvas id="theoreticalChart"></canvas>
+                        </div>
+                         <p class="text-sm text-gray-500 mt-4 text-center">
+                            Number Theory remains the most active area within core mathematics, driven by its deep, unsolved conjectures and its critical role in modern cryptography.
+                        </p>
+                    </div>
+                    <div class="md:col-span-2 flex flex-col justify-center space-y-6">
+                        <div class="bg-primary/5 border-2 border-primary/20 rounded-lg p-6 text-center">
+                             <p class="text-5xl mb-4">🔐</p>
+                            <h4 class="text-lg font-bold text-primary">P versus NP</h4>
+                            <p class="mt-2 text-gray-600">A central problem in computational complexity. It asks: if the answer to a problem is easy to <span class="font-bold text-accent1">verify</span>, is it also easy to <span class="font-bold text-accent2">solve</span>? The answer could revolutionize computing and cryptography.</p>
+                        </div>
+                        <div class="bg-secondary/5 border-2 border-secondary/20 rounded-lg p-6 text-center">
+                            <p class="text-5xl mb-4">🔢</p>
+                            <h4 class="text-lg font-bold text-secondary">Riemann Hypothesis</h4>
+                            <p class="mt-2 text-gray-600">A conjecture about the locations of zeros of the Riemann zeta function. Its proof would have profound consequences for our understanding of the distribution of prime numbers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quantum-ai" class="my-20 fade-in-section">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-primary mb-2">The Quantum & AI Revolutions</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    Two of the most powerful forces reshaping science are deeply rooted in mathematics. Quantum mechanics requires new mathematical languages, while AI is becoming a collaborator in mathematical discovery itself.
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-start">
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">The AI-Mathematics Symbiosis</h3>
+                        <p class="text-center text-gray-600 mb-6">AI is evolving from a mere tool to a genuine partner in research, creating a powerful cycle of discovery.</p>
+                        <div class="flex flex-col items-center">
+                            <div class="bg-gray-50 border rounded-lg p-4 w-full max-w-xs text-center shadow">
+                                <p class="font-bold text-primary">1. Human Intuition & Guidance</p>
+                                <p class="text-sm text-gray-600">Mathematicians identify promising areas and pose high-level questions.</p>
+                            </div>
+                            <div class="flowchart-arrow"></div>
+                            <div class="bg-gray-50 border rounded-lg p-4 w-full max-w-xs text-center shadow">
+                                <p class="font-bold text-accent1">2. AI Conjecture Generation</p>
+                                <p class="text-sm text-gray-600">Machine learning models analyze data to find hidden patterns and propose new hypotheses.</p>
+                            </div>
+                            <div class="flowchart-arrow"></div>
+                            <div class="bg-gray-50 border rounded-lg p-4 w-full max-w-xs text-center shadow">
+                                <p class="font-bold text-accent2">3. Formalization & Verification</p>
+                                <p class="text-sm text-gray-600">AI "copilots" help translate ideas into rigorous, machine-readable proofs in systems like Lean.</p>
+                            </div>
+                            <div class="flowchart-arrow"></div>
+                            <div class="bg-gray-50 border rounded-lg p-4 w-full max-w-xs text-center shadow">
+                                <p class="font-bold text-green-600">4. New Theorems & Deeper Understanding</p>
+                                <p class="text-sm text-gray-600">This collaborative cycle accelerates the pace of discovery and formalization.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">Mapping the Quantum Frontiers</h3>
+                        <div class="chart-container">
+                            <canvas id="quantumChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 text-center">
+                            Research in quantum mathematics is multifaceted, spanning from the foundations of quantum computers to the grand challenge of unifying physics and securing future communications.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="interdisciplinary-impact" class="my-20 fade-in-section">
+            <div class="bg-white rounded-xl shadow-lg p-6 md:p-8">
+                <h2 class="text-3xl font-bold text-center text-primary mb-2">Mathematics in Action: Interdisciplinary Impact</h2>
+                <p class="text-center text-lg text-gray-600 max-w-3xl mx-auto mb-8">
+                    Abstract mathematical concepts provide essential frameworks for solving concrete problems across a vast range of fields, driving innovation and enabling progress.
+                </p>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                     <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">Ranking Interdisciplinary Hotspots</h3>
+                        <div class="chart-container h-[450px] max-h-[60vh]">
+                            <canvas id="interdisciplinaryChart"></canvas>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-4 text-center">
+                           Mathematical Biology & Neuroscience is a leading area of application, reflecting the immense complexity of biological systems that require sophisticated modeling.
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-center mb-4 text-secondary">The Ripple Effect of Core Mathematics</h3>
+                        <p class="text-center text-gray-600 mb-8">Breakthroughs in foundational mathematics create powerful tools that spread outwards, transforming technology and science.</p>
+                        <div id="relationshipDiagram" class="relative min-h-[400px] flex items-center justify-center">
+                             <div class="absolute bg-primary text-white rounded-full h-48 w-48 flex flex-col items-center justify-center text-center p-4 shadow-2xl z-10">
+                                <span class="font-bold text-lg">Core & Applied Mathematics</span>
+                                <span class="text-sm opacity-80">(Number Theory, Geometry, Analysis, Logic)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <footer class="text-center my-12 fade-in-section">
+            <h2 class="text-3xl font-bold text-primary mb-4">The Future is Mathematical</h2>
+            <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                The future of mathematical research points towards an increasingly integrated, computational, and collaborative discipline. The synergy between human ingenuity and artificial intelligence, coupled with deep interdisciplinary connections, will define the next era of discovery, unlocking solutions to humanity's most pressing challenges.
+            </p>
+        </footer>
+
+    </div>
+
+    <footer class="bg-primary text-gray-300 p-8 mt-16">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+                <h3 class="font-bold text-white text-lg mb-4">Math Frontiers</h3>
+                <p class="text-sm">Exploring the cutting edge of mathematical research and its impact on the world.</p>
+            </div>
+            <div>
+                <h3 class="font-bold text-white text-lg mb-4">Quick Links</h3>
+                <ul class="space-y-2">
+                    <li><a href="#overview-stats" class="hover:text-white transition-colors">Overview</a></li>
+                    <li><a href="#landscape-discovery" class="hover:text-white transition-colors">Landscape of Discovery</a></li>
+                    <li><a href="#core-computational" class="hover:text-white transition-colors">Core & Computational</a></li>
+                    <li><a href="#quantum-ai" class="hover:text-white transition-colors">Quantum & AI Revolutions</a></li>
+                    <li><a href="#interdisciplinary-impact" class="hover:text-white transition-colors">Interdisciplinary Impact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold text-white text-lg mb-4">External Resources</h3>
+                <ul class="space-y-2">
+                    <li><a href="https://www.claymath.org/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">Clay Mathematics Institute</a></li>
+                    <li><a href="https://www.siam.org/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">SIAM</a></li>
+                    <li><a href="https://www.ams.org/" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors">American Mathematical Society</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="text-center text-gray-400 text-sm mt-8 pt-8 border-t border-gray-700">
+            &copy; 2025 Math Frontiers. All rights reserved. Infographic created with Chart.js and Tailwind CSS.
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            const PALETTE = {
+                primary: '#003f5c',
+                secondary: '#7a5195',
+                accent1: '#ef5675',
+                accent2: '#ff764a',
+                accent3: '#ffa600',
+                gray: '#a0aec0'
+            };
+
+            const FONT_COLOR = '#4a5568';
+            const GRID_COLOR = '#e2e8f0';
+
+            const wrapLabel = (str, maxWidth) => {
+                if (str.length <= maxWidth) return str;
+                const words = str.split(' ');
+                let lines = [];
+                let currentLine = words[0];
+
+                for (let i = 1; i < words.length; i++) {
+                    if (currentLine.length + words[i].length + 1 < maxWidth) {
+                        currentLine += ' ' + words[i];
+                    } else {
+                        lines.push(currentLine);
+                        currentLine = words[i];
+                    }
+                }
+                lines.push(currentLine);
+                return lines;
+            };
+
+            const processLabels = (labels, maxWidth = 16) => {
+                return labels.map(label => wrapLabel(label, maxWidth));
+            };
+            
+            const tooltipTitleCallback = {
+                callbacks: {
+                    title: function(tooltipItems) {
+                        const item = tooltipItems[0];
+                        let label = item.chart.data.labels[item.dataIndex];
+                        return Array.isArray(label) ? label.join(' ') : label;
+                    }
+                }
+            };
+            
+            const commonChartOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: FONT_COLOR
+                        }
+                    },
+                    tooltip: tooltipTitleCallback
+                },
+                scales: {
+                    x: {
+                        ticks: { color: FONT_COLOR },
+                        grid: { color: GRID_COLOR }
+                    },
+                    y: {
+                        ticks: { color: FONT_COLOR },
+                        grid: { color: GRID_COLOR }
+                    }
+                }
+            };
+            
+            const distributionChartCtx = document.getElementById('distributionChart').getContext('2d');
+            new Chart(distributionChartCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Core Theoretical', 'Computational/Applied', 'Quantum', 'AI-Driven', 'Interdisciplinary'],
+                    datasets: [{
+                        label: '# of Topics',
+                        data: [30, 15, 15, 15, 30],
+                        backgroundColor: [
+                            PALETTE.primary,
+                            PALETTE.secondary,
+                            PALETTE.accent1,
+                            PALETTE.accent2,
+                            PALETTE.accent3,
+                        ],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                             labels: { color: FONT_COLOR }
+                        },
+                        tooltip: tooltipTitleCallback
+                    }
+                }
+            });
+            
+            const theoreticalChartCtx = document.getElementById('theoreticalChart').getContext('2d');
+            new Chart(theoreticalChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['Number Theory', 'Algebraic Geometry', 'Topology', 'Mathematical Logic', 'Category Theory', 'Noncommutative Geometry'], 25),
+                    datasets: [{
+                        label: 'Number of Frontier Topics',
+                        data: [10, 5, 5, 5, 3, 2],
+                        backgroundColor: PALETTE.primary,
+                        borderColor: PALETTE.primary,
+                        borderWidth: 1
+                    }]
+                },
+                options: { ...commonChartOptions, indexAxis: 'y' }
+            });
+
+            const quantumChartCtx = document.getElementById('quantumChart').getContext('2d');
+            new Chart(quantumChartCtx, {
+                type: 'radar',
+                data: {
+                    labels: processLabels(['Algorithms & Complexity', 'Error Correction', 'Q. Machine Learning', 'Secure Communication', 'Quantum Field Theory', 'Quantum Gravity']),
+                    datasets: [{
+                        label: 'Research Focus',
+                        data: [8, 7, 6, 8, 9, 7],
+                        backgroundColor: 'rgba(239, 86, 117, 0.2)',
+                        borderColor: PALETTE.accent1,
+                        pointBackgroundColor: PALETTE.accent1,
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: PALETTE.accent1
+                    }]
+                },
+                options: {
+                     responsive: true,
+                     maintainAspectRatio: false,
+                     plugins: {
+                        legend: { display: false },
+                        tooltip: tooltipTitleCallback
+                    },
+                    scales: {
+                        r: {
+                             angleLines: { color: GRID_COLOR },
+                             grid: { color: GRID_COLOR },
+                             pointLabels: { color: FONT_COLOR, font: { size: 12 } },
+                             ticks: {
+                                backdropColor: 'rgba(255, 255, 255, 0.75)',
+                                color: FONT_COLOR
+                            }
+                        }
+                    }
+                }
+            });
+
+            const interdisciplinaryChartCtx = document.getElementById('interdisciplinaryChart').getContext('2d');
+            new Chart(interdisciplinaryChartCtx, {
+                type: 'bar',
+                data: {
+                    labels: processLabels(['Math Biology & Neuroscience', 'Math Finance & Economics', 'Blockchain & Crypto', 'Deep Learning Theory', 'Climate Science', 'Materials Science'], 20),
+                    datasets: [{
+                        label: 'Number of Frontier Topics',
+                        data: [10, 5, 5, 4, 3, 3].sort((a,b) => b-a),
+                        backgroundColor: [
+                            PALETTE.accent3,
+                            PALETTE.accent2,
+                            PALETTE.accent1,
+                            PALETTE.secondary,
+                            PALETTE.primary,
+                             '#bc5090'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                 options: {
+                    ...commonChartOptions,
+                    scales: {
+                        x: { ticks: { color: FONT_COLOR }, grid: { display: false } },
+                        y: { ticks: { color: FONT_COLOR }, grid: { color: GRID_COLOR } }
+                    }
+                }
+            });
+            
+            const relationshipDiagram = document.getElementById('relationshipDiagram');
+            const items = [
+                { name: 'Cybersecurity', angle: 45, dist: 150 },
+                { name: 'Healthcare', angle: 110, dist: 160 },
+                { name: 'Climate Science', angle: 180, dist: 150 },
+                { name: 'AI & Deep Learning', angle: 250, dist: 160 },
+                { name: 'Quantum Computing', angle: 315, dist: 150 }
+            ];
+            
+            items.forEach(item => {
+                const angleRad = item.angle * Math.PI / 180;
+                const x = item.dist * Math.cos(angleRad);
+                const y = item.dist * Math.sin(angleRad);
+
+                const node = document.createElement('div');
+                node.className = 'absolute bg-white rounded-lg p-3 shadow-md text-center transform -translate-x-1/2 -translate-y-1/2';
+                node.style.left = `calc(50% + ${x}px)`;
+                node.style.top = `calc(50% + ${y}px)`;
+                node.textContent = item.name;
+                relationshipDiagram.appendChild(node);
+                
+                const line = document.createElement('div');
+                line.className = 'relationship-arrow';
+                const length = Math.sqrt(x*x + y*y);
+                line.style.width = `${length - 24}px`;
+                line.style.left = '50%';
+                line.style.top = '50%';
+                line.style.transform = `rotate(${item.angle}deg)`;
+                relationshipDiagram.appendChild(line);
+            });
+
+
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
