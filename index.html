@@ -13,13 +13,14 @@
         body {
             font-family: 'Inter', sans-serif;
             scroll-behavior: smooth;
-            background: radial-gradient(at 20% 70%, rgba(239, 86, 117, 0.2) 0%, transparent 50%),
-                        radial-gradient(at 80% 30%, rgba(122, 81, 149, 0.2) 0%, transparent 50%),
-                        radial-gradient(at 50% 0%, rgba(0, 63, 92, 0.15) 0%, transparent 60%),
-                        radial-gradient(at 10% 20%, rgba(255, 118, 74, 0.15) 0%, transparent 60%),
-                        radial-gradient(at 90% 90%, rgba(255, 166, 0, 0.2) 0%, transparent 50%),
-                        linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            background: radial-gradient(at 20% 70%, rgba(239, 86, 117, 0.1) 0%, transparent 50%),
+                        radial-gradient(at 80% 30%, rgba(122, 81, 149, 0.1) 0%, transparent 50%),
+                        radial-gradient(at 50% 0%, rgba(0, 63, 92, 0.08) 0%, transparent 60%),
+                        radial-gradient(at 10% 20%, rgba(255, 118, 74, 0.08) 0%, transparent 60%),
+                        radial-gradient(at 90% 90%, rgba(255, 166, 0, 0.1) 0%, transparent 50%),
+                        linear-gradient(to bottom right, #f8f9fa, #e9ecef); /* Softer, lighter base gradient */
             background-attachment: fixed;
+            color: #4a5568; /* Default text color, slightly softer than gray-800 */
         }
         .chart-container {
             position: relative;
@@ -71,19 +72,20 @@
             color: #7a5195;
         }
         .glass-card {
-            background-color: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            background-color: rgba(255, 255, 255, 0.08); /* More subtle transparency */
+            backdrop-filter: blur(12px); /* Slightly stronger blur */
+            border: 1px solid rgba(255, 255, 255, 0.15); /* Subtler border */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.08); /* Softer, layered shadow */
             border-radius: 12px;
         }
         .glass-nav-footer {
-            background-color: rgba(0, 63, 92, 0.8);
-            backdrop-filter: blur(5px);
+            background-color: rgba(0, 63, 92, 0.7); /* Slightly more transparent */
+            backdrop-filter: blur(8px); /* Matches glass-card blur strength more */
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); /* Consistent shadow style */
         }
     </style>
 </head>
-<body class="text-gray-800">
+<body class="text-gray-700">
 
     <nav class="glass-nav-footer p-4 shadow-md sticky top-0 z-50">
         <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
@@ -146,13 +148,13 @@
                         <h3 class="text-xl font-semibold text-center mb-4 text-secondary">The Millennium Prize Problems</h3>
                         <p class="text-center text-gray-600 mb-4">Seven of the most profound and difficult open problems, established in 2000 to guide research.</p>
                         <div class="space-y-3">
-                            <div class="glass-card bg-red-100/50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Birch and Swinnerton-Dyer Conjecture</div>
-                            <div class="glass-card bg-red-100/50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Hodge Conjecture</div>
-                            <div class="glass-card bg-red-100/50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Navier–Stokes Existence and Smoothness</div>
-                            <div class="glass-card bg-red-100/50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> P versus NP Problem</div>
-                            <div class="glass-card bg-red-100/50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Riemann Hypothesis</div>
-                            <div class="glass-card bg-red-100/50 border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Yang–Mills Existence and Mass Gap</div>
-                            <div class="glass-card bg-green-100/50 border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg"><strong>Solved:</strong> Poincaré Conjecture (by G. Perelman)</div>
+                            <div class="glass-card border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Birch and Swinnerton-Dyer Conjecture</div>
+                            <div class="glass-card border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Hodge Conjecture</div>
+                            <div class="glass-card border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Navier–Stokes Existence and Smoothness</div>
+                            <div class="glass-card border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> P versus NP Problem</div>
+                            <div class="glass-card border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Riemann Hypothesis</div>
+                            <div class="glass-card border-l-4 border-red-500 text-red-700 p-4 rounded-r-lg"><strong>Unsolved:</strong> Yang–Mills Existence and Mass Gap</div>
+                            <div class="glass-card border-l-4 border-green-500 text-green-700 p-4 rounded-r-lg"><strong>Solved:</strong> Poincaré Conjecture (by G. Perelman)</div>
                         </div>
                     </div>
                 </div>
@@ -504,7 +506,7 @@
                 const y = item.dist * Math.sin(angleRad);
 
                 const node = document.createElement('div');
-                node.className = 'absolute bg-white rounded-lg p-3 shadow-md text-center transform -translate-x-1/2 -translate-y-1/2';
+                node.className = 'absolute glass-card p-3 shadow-md text-center transform -translate-x-1/2 -translate-y-1/2';
                 node.style.left = `calc(50% + ${x}px)`;
                 node.style.top = `calc(50% + ${y}px)`;
                 node.textContent = item.name;
